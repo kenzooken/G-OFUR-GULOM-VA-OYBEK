@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G‘afur G‘ulom va Oybek ijodi</title>
+<style>
+  /* ===== BODY & FONT ===== */
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ===== BACKGROUND FLOATING ELEMENTS ===== */
+  .background {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    z-index:-1;
+    overflow:hidden;
+  }
+  .background span {
+    position:absolute;
+    display:block;
+    border-radius:50%;
+    background: rgba(0,234,255,0.15);
+    animation: float 25s linear infinite;
+  }
+  .background span:nth-child(1){ left:10%; width:80px; height:80px; animation-duration:20s;}
+  .background span:nth-child(2){ left:25%; width:140px; height:140px; animation-duration:28s;}
+  .background span:nth-child(3){ left:45%; width:100px; height:100px; animation-duration:22s;}
+  .background span:nth-child(4){ left:65%; width:180px; height:180px; animation-duration:35s;}
+  .background span:nth-child(5){ left:80%; width:90px; height:90px; animation-duration:26s;}
+  .background span:nth-child(6){ left:90%; width:60px; height:60px; animation-duration:18s;}
+
+  @keyframes float {
+    0% {transform: translateY(0) translateX(0); opacity:0;}
+    20% {opacity:1;}
+    100% {transform: translateY(-120vh) translateX(50px); opacity:0;}
+  }
+
+  /* ===== HEADER ===== */
+  h1 {
+    text-align:center;
+    padding:50px 15px 10px;
+    font-size:3rem;
+    opacity:0;
+    animation: fadeIn 3s forwards;
+  }
+  @keyframes fadeIn {
+    0% {opacity:0;}
+    100% {opacity:1;}
+  }
+  .subtitle {
+    text-align:center;
+    font-size:1.2rem;
+    opacity:0;
+    animation: fadeIn 4s forwards;
+    animation-delay:1s;
+    margin-bottom:50px;
+  }
+
+  /* ===== CONTAINER & CARDS ===== */
+  .container {
+    max-width:1300px;
+    margin:auto;
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px,1fr));
+    gap:25px;
+    padding:0 20px 50px;
+  }
+  .card {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border-radius:22px;
+    padding:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    transform: translateY(60px);
+    opacity:0;
+    transition: all 0.6s ease;
+  }
+  .card.show {transform:translateY(0); opacity:1;}
+  .card:hover {transform: scale(1.05); box-shadow: 0 25px 50px rgba(0,0,0,0.6);}
+  .card img {width:100%; height:220px; object-fit:cover; border-radius:15px; margin-bottom:15px;}
+  .card h2 {color:#00eaff; margin-bottom:10px;}
+  ul {padding-left:18px;}
+  ul li {margin-bottom:10px; line-height:1.6;}
+
+  /* ===== DIFFERENCES & SIMILARITIES ===== */
+  .compare {
+    max-width:900px;
+    margin:50px auto;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border-radius:25px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  }
+  .compare h2 {text-align:center; color:#00ff6a; margin-bottom:20px;}
+  .compare ul li {margin-bottom:15px;}
+
+  /* ===== TEST SECTION ===== */
+  .test-section {
+    max-width:900px;
+    margin:50px auto;
+    padding:20px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(15px);
+    border-radius:25px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.5);
+  }
+  .test-section h2 {text-align:center; color:#ff00ff; margin-bottom:20px;}
+  .question {margin-bottom:25px;}
+  .question p {margin-bottom:10px;}
+  .answers label {
+    display:block;
+    margin-bottom:8px;
+    padding:8px 15px;
+    border-radius:10px;
+    background: rgba(255,255,255,0.1);
+    cursor:pointer;
+    transition:0.3s;
+  }
+  .answers input[type="radio"]{display:none;}
+  .answers label:hover {background: rgba(0,234,255,0.2);}
+  .answers input[type="radio"]:checked + label {background:#00eaff; color:#000;}
+
+  .submit-btn {
+    display:block;
+    margin:20px auto;
+    padding:10px 25px;
+    font-size:1.1rem;
+    border:none;
+    border-radius:15px;
+    background:#ff00ff;
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s;
+  }
+  .submit-btn:hover {background:#ff66ff;}
+  .result {
+    text-align:center;
+    font-size:1.5rem;
+    margin-top:20px;
+    color:#00ff6a;
+  }
+
+  footer {
+    text-align:center;
+    padding:25px;
+    opacity:0.7;
+  }
+
+</style>
+</head>
+<body>
+<div class="background">
+  <span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<h1>G‘afur G‘ulom va Oybek ijodi</h1>
+<p class="subtitle">Hayoti, ijodi, o‘xshashlik va farqlar</p>
+
+<div class="container">
+  <div class="card show">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Gafur_Gulom.jpg/440px-Gafur_Gulom.jpg" alt="G‘afur G‘ulom">
+    <h2>G‘afur G‘ulom (1903–1966)</h2>
+    <ul>
+      <li>O‘zbek adabiyotining mashhur shoiri va yozuvchisi</li>
+      <li>Asarlarida xalq hayoti, bolalar va yetimlarning taqdiri yoritilgan</li>
+      <li>Hazil-mutoyiba, kinoya va satira ustasi</li>
+      <li>Ikkinchi jahon urushi davridagi qiyinchiliklarni real tasvirlagan</li>
+      <li>Bolalar adabiyotiga katta hissa qo‘shgan</li>
+      <li>Mashhur asarlari: “Shum bola”, “Netay”, “Yodgor”</li>
+      <li>O‘zbekiston xalq yozuvchisi unvoniga sazovor bo‘lgan</li>
+      <li>Ijodiy faoliyati davomida ko‘plab maktab va bolalar jurnallariga maqolalar yozgan</li>
+      <li>Adabiyotda ijtimoiy mavzularni chuqur o‘rganib, xalq hayotini sahnaga olib chiqqan</li>
+    </ul>
+  </div>
+
+  <div class="card show">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/Oybek_%28writer%29.jpg/440px-Oybek_%28writer%29.jpg" alt="Oybek">
+    <h2>Oybek (1899–1968)</h2>
+    <ul>
+      <li>O‘zbek adabiyotining mashhur yozuvchi va publitsisti</li>
+      <li>Asarlari ko‘pincha tarixiy mavzularga, xalq va milliy qadriyatlarni yoritishga bag‘ishlangan</li>
+      <li>Realistik va dramatik janrda ijod qilgan</li>
+      <li>“Kecha va kunduz”, “O‘tkan kunlar” kabi asarlari mashhur</li>
+      <li>O‘zbekiston xalq yozuvchisi unvoniga sazovor bo‘lgan</li>
+      <li>Asarlarida milliy o‘zlik va madaniyatni targ‘ib qilgan</li>
+      <li>Ijodiy faoliyatida o‘quvchilarni tarbiyaviy asarlar bilan qiziqtirgan</li>
+      <li>Adabiy tanqid va publitsistik maqolalar yozgan</li>
+    </ul>
+  </div>
+</div>
+
+<!-- COMPARISON -->
+<div class="compare">
+  <h2>O‘xshashlik va Farqlar</h2>
+  <ul>
+    <li><b>O‘xshashlik:</b> Ikkalasi ham O‘zbekiston xalq yozuvchisi unvoniga ega, xalq hayoti va tarbiyasiga e’tibor qaratgan.</li>
+    <li><b>Farq:</b> G‘afur G‘ulom asosan bolalar adabiyotiga urg‘u bergan, hazil va satira ustasi. Oybek esa tarixiy va dramatik janrga e’tibor qilgan.</li>
+  </ul>
+</div>
+
+<!-- TEST -->
+<div class="test-section">
+  <h2>Test: G‘afur G‘ulom va Oybek</h2>
+  <form id="testForm">
+    <div class="question">
+      <p>1. G‘afur G‘ulom qaysi janrda ijod qilgan?</p>
+      <div class="answers">
+        <input type="radio" name="q1" id="q1a" value="0"><label for="q1a">Tarixiy</label>
+        <input type="radio" name="q1" id="q1b" value="1"><label for="q1b">Bolalar va satira</label>
+        <input type="radio" name="q1" id="q1c" value="0"><label for="q1c">Publitsistika</label>
+      </div>
+    </div>
+    <div class="question">
+      <p>2. Oybek mashhur asari qaysi?</p>
+      <div class="answers">
+        <input type="radio" name="q2" id="q2a" value="1"><label for="q2a">Kecha va kunduz</label>
+        <input type="radio" name="q2" id="q2b" value="0"><label for="q2b">Shum bola</label>
+        <input type="radio" name="q2" id="q2c" value="0"><label for="q2c">Netay</label>
+      </div>
+    </div>
+    <!-- Qo‘shimcha 8 savol shu kabi -->
+    <div class="question">
+      <p>3. G‘afur G‘ulom qachon tug‘ilgan?</p>
+      <div class="answers">
+        <input type="radio" name="q3" id="q3a" value="1"><label for="q3a">1903</label>
+        <input type="radio" name="q3" id="q3b" value="0"><label for="q3b">1899</label>
+        <input type="radio" name="q3" id="q3c" value="0"><label for="q3c">1966</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>4. Oybekning tug‘ilgan yili?</p>
+      <div class="answers">
+        <input type="radio" name="q4" id="q4a" value="0"><label for="q4a">1903</label>
+        <input type="radio" name="q4" id="q4b" value="1"><label for="q4b">1899</label>
+        <input type="radio" name="q4" id="q4c" value="0"><label for="q4c">1966</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>5. Qaysi adib bolalar adabiyotiga urg‘u bergan?</p>
+      <div class="answers">
+        <input type="radio" name="q5" id="q5a" value="1"><label for="q5a">G‘afur G‘ulom</label>
+        <input type="radio" name="q5" id="q5b" value="0"><label for="q5b">Oybek</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>6. “Shum bola” qaysi yozuvchining asari?</p>
+      <div class="answers">
+        <input type="radio" name="q6" id="q6a" value="1"><label for="q6a">G‘afur G‘ulom</label>
+        <input type="radio" name="q6" id="q6b" value="0"><label for="q6b">Oybek</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>7. Oybek qaysi janrga e’tibor qilgan?</p>
+      <div class="answers">
+        <input type="radio" name="q7" id="q7a" value="0"><label for="q7a">Bolalar va hazil</label>
+        <input type="radio" name="q7" id="q7b" value="1"><label for="q7b">Tarixiy va dramatik</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>8. Ikkalasi ham qaysi unvon egasi?</p>
+      <div class="answers">
+        <input type="radio" name="q8" id="q8a" value="1"><label for="q8a">O‘zbekiston xalq yozuvchisi</label>
+        <input type="radio" name="q8" id="q8b" value="0"><label for="q8b">Akademik</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>9. Hazil va satira ustasi kim?</p>
+      <div class="answers">
+        <input type="radio" name="q9" id="q9a" value="1"><label for="q9a">G‘afur G‘ulom</label>
+        <input type="radio" name="q9" id="q9b" value="0"><label for="q9b">Oybek</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>10. “O‘tkan kunlar” muallifi?</p>
+      <div class="answers">
+        <input type="radio" name="q10" id="q10a" value="0"><label for="q10a">G‘afur G‘ulom</label>
+        <input type="radio" name="q10" id="q10b" value="1"><label for="q10b">Oybek</label>
+      </div>
+    </div>
+
+    <button type="button" class="submit-btn" onclick="checkTest()">Natijani ko‘rish</button>
+    <div class="result" id="result"></div>
+  </form>
+</div>
+
+<footer>
+  &copy; 2026 G‘afur G‘ulom va Oybek ijodi
+</footer>
+
+<script>
+  // CARD SHOW EFFECT
+  const cards = document.querySelectorAll('.card');
+  cards.forEach((card, i) => {
+    setTimeout(() => {card.classList.add('show');}, i*300);
+  });
+
+  // TEST FUNCTION
+  function checkTest() {
+    let total = 10;
+    let score = 0;
+    for(let i=1; i<=total; i++){
+      let radios = document.getElementsByName('q'+i);
+      for(let j=0; j<radios.length; j++){
+        if(radios[j].checked && radios[j].value=="1") score++;
+      }
+    }
+    document.getElementById('result').innerText = `Natija: ${score}/${total}`;
+  }
+</script>
+</body>
+</html>
